@@ -1,0 +1,15 @@
+body {
+  font-family: Arial;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+#profile {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px gray;
+  text-align: center;
+}
