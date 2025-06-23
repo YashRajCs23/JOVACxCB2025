@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GitHub Profile Viewer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>GitHub Profile Viewer</h2>
+    <form id="searchForm">
+      <input type="text" id="usernameInput" placeholder="Enter GitHub username" required />
+      <button type="submit">Search</button>
+    </form>
+
+    <div id="profile" class="hidden">
+      <div class="profile-header">
+        <img id="avatar" src="" alt="Avatar" />
+        <div>
+          <h3 id="name">Name</h3>
+          <p id="username">@username</p>
+          <p id="location">Location</p>
+          <p id="joined">Joined: </p>
+        </div>
+      </div>
+
+      <div class="stats">
+        <span>Followers: <strong id="followers"></strong></span>
+        <span>Following: <strong id="following"></strong></span>
+        <span>Public Repos: <strong id="reposCount"></strong></span>
+      </div>
+
+      <div id="repos"></div>
+    </div>
+  </div>
+
+  <footer class="footer">Made by Yash Raj Srivastava</footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
