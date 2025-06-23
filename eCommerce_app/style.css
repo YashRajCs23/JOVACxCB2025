@@ -1,0 +1,86 @@
+/* General page styling */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Main container */
+.continer {
+    background-color: #1e1e1e;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 600px;
+}
+
+/* Headings */
+h1, h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+/* Each product row styled like a card */
+.product {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2a2a2a;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Product description text */
+.product span {
+    font-size: 16px;
+    color: #f0f0f0;
+}
+
+/* Product buttons */
+.product button {
+    background-color: #6200ea;
+    border: none;
+    padding: 6px 12px;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.product button:hover {
+    background-color: #3700b3;
+}
+
+/* Cart items spacing */
+#cart-items {
+    margin-bottom: 20px;
+}
+
+/* Checkout button */
+#checkout-btn {
+    background-color: #6200ea;
+    border: none;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#checkout-btn:hover {
+    background-color: #3700b3;
+}
+
+/* Hidden utility class */
+.hidden {
+    display: none;
+}
