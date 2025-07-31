@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= blog.title %> | My Blog</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .blog-image {
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .blog-content {
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+    .blog-meta {
+      color: #666;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <main class="container">
+    <div class="back-link">
+      <a href="/">&larr; Back to all posts</a>
+    </div>
+
+    <article class="blog-detail">
+      <% if (blog.imageUrl) { %>
+        <img src="<%= blog.imageUrl %>?tr=w-1200,h-630,fo-auto" 
+             alt="<%= blog.title %>" 
+             class="blog-image">
+      <% } %>
+
+      <h1><%= blog.title %></h1>
+      
+      <div class="blog-meta">
+        Posted by <%= blog.author.username %> on 
+        <%= blog.createdAt.toLocaleDateString('en-US', { 
+          year: 'numeric', 
+          month: 'long', 
+          day: 'numeric' 
+        }) %>
+      </div>
+
+      <div class="blog-content">
+        <%= blog.content %>
+      </div>
+
+      <% if (user && user.id === blog.author._id.toString()) { %>
+        <div class="blog-actions">
+          <a href="/blogs/<%= blog._id %>/edit" class="btn btn-secondary">Edit</a>
+          <form action="/blogs/<%= blog._id %>?_method=DELETE" method="POST" class="delete-form">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      <% } %>
+    </article>
+  </main>
+
+  <%- include('../partials/footer') %>
+
+  <script>
+    // Confirm before deletion
+    document.querySelectorAll('.delete-form').forEach(form => {
+      form.addEventListener('submit', (e) => {
+        if (!confirm('Are you sure you want to delete this post?')) {
+          e.preventDefault();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

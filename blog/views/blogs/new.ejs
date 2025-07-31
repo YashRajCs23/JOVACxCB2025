@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> | My Blog</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .image-preview {
+      max-width: 100%;
+      max-height: 300px;
+      margin: 15px 0;
+      border-radius: 8px;
+      display: none;
+    }
+    .upload-area {
+      border: 2px dashed #ccc;
+      padding: 25px;
+      text-align: center;
+      margin: 15px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .upload-area:hover {
+      border-color: #007bff;
+      background: #f8f9fa;
+    }
+  </style>
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <main class="container">
+    <h1>Create New Blog Post</h1>
+    
+    <form method="POST" enctype="multipart/form-data" class="blog-form">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" required class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label>Featured Image</label>
+        <div class="upload-area" id="upload-area">
+          <p>Click to upload or drag & drop</p>
+          <p><small>Recommended size: 1200x630px (Max 5MB)</small></p>
+          <input type="file" id="image-upload" name="image" accept="image/*" style="display:none">
+        </div>
+        <img id="image-preview" class="image-preview" alt="Preview">
+      </div>
+
+      <div class="form-group">
+        <label for="content">Content</label>
+        <textarea id="content" name="content" rows="12" required class="form-control"></textarea>
+      </div>
+
+      <% if (error) { %>
+        <div class="alert alert-error"><%= error %></div>
+      <% } %>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Publish Post</button>
+        <a href="/" class="btn btn-secondary">Cancel</a>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    // Image upload handling
+    const uploadArea = document.getElementById('upload-area');
+    const fileInput = document.getElementById('image-upload');
+    const preview = document.getElementById('image-preview');
+
+    uploadArea.addEventListener('click', () => fileInput.click());
+    
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          preview.src = event.target.result;
+          preview.style.display = 'block';
+          uploadArea.style.display = 'none';
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      }
+    });
+
+    // Drag & drop
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(event => {
+      uploadArea.addEventListener(event, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    uploadArea.addEventListener('drop', handleDrop, false);
+
+    function handleDrop(e) {
+      const dt = e.dataTransfer;
+      const files = dt.files;
+      if (files.length) {
+        fileInput.files = files;
+        const changeEvent = new Event('change');
+        fileInput.dispatchEvent(changeEvent);
+      }
+    }
+  </script>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>
